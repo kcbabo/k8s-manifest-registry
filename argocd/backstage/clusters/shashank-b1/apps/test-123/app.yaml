@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test2
+  labels:
+    backstage.io/kubernetes-id: test-123
+    istio.io/dataplane-mode: ambient
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: test-123
+  namespace: test2
+  labels:
+    backstage.io/kubernetes-id: test-123
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-123
+  namespace: test2
+  labels:
+    app: test-123
+    backstage.io/kubernetes-id: test-123
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80
+  selector:
+    app: test-123
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-123
+  namespace: test2
+  labels:
+    backstage.io/kubernetes-id: test-123
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-123
+  template:
+    metadata:
+      labels:
+        app: test-123
+        backstage.io/kubernetes-id: test-123
+    spec:
+      serviceAccountName: test-123
+      containers:
+      - image: docker.io/kcbabo/keith-react-app:latest
+        imagePullPolicy: Always
+        name: test-123
+        ports:
+        - containerPort: 80

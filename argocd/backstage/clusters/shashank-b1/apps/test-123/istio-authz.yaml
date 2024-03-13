@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: test-123
+  namespace: test2
+  labels:
+    backstage.io/kubernetes-id: test-123
+spec:
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces:
+          - curl
