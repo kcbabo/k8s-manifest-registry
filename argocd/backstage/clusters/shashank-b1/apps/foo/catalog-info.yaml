@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: foo-k8s
+  description: Kubernetes component for foo
+  annotations:
+    github.com/project-slug: kcbabo/k8s-manifest-registry
+    backstage.io/kubernetes-id: foo
+    backstage.io/kubernetes-namespace: test
+    prometheus.io/rule: "istio_tcp_received_bytes_total{destination_workload='foo'},istio_tcp_sent_bytes_total{source_workload='foo'}"
+spec:
+  type: service
+  lifecycle: production
+  # TODO: templatize owner
+  owner:  group:default/app-team
