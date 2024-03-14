@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keith-react-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kcbabo/k8s-manifest-registry
+    path: argocd/backstage/clusters/shashank-b1/apps/keith-react-app/app
+    targetRevision: main
+    directory:
+      recurse: true
+      exclude: '{*catalog-info.yaml}'
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 1
+        maxDuration: 1m0s
