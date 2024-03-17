@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: server-app
+  description: Kubernetes component for server-app
+  annotations:
+    github.com/project-slug: kcbabo/k8s-manifest-registry
+    backstage.io/kubernetes-id: server-app
+    backstage.io/kubernetes-namespace: test3
+    argocd/app-name: server-app
+spec:
+  type: service
+  lifecycle: production
+  # TODO: templatize owner
+  owner:  group:default/app-team
