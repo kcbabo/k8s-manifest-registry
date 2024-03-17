@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: client-app
+  namespace: test2
+  labels:
+    backstage.io/kubernetes-id: client-app
+spec:
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces:
+          - test

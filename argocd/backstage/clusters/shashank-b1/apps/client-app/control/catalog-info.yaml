@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: client-app
+  description: Kubernetes component for client-app
+  annotations:
+    github.com/project-slug: kcbabo/k8s-manifest-registry
+    backstage.io/kubernetes-id: client-app
+    backstage.io/kubernetes-namespace: test2
+    prometheus.io/rule: "istio_tcp_received_bytes_total{destination_workload='client-app'},istio_tcp_sent_bytes_total{source_workload='client-app'}"
+    argocd/app-name: client-app
+spec:
+  type: service
+  lifecycle: production
+  # TODO: templatize owner
+  owner:  group:default/app-team
