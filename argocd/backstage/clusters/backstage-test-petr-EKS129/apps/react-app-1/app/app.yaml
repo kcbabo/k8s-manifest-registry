@@ -49,7 +49,7 @@ spec:
     spec:
       serviceAccountName: react-app-1
       containers:
-      - image: docker.io/kcbabo/keith-react-app:latest
+      - image: docker.io/mcallisterpetr/my-react-app:latest
         imagePullPolicy: Always
         name: react-app-1
         ports:
