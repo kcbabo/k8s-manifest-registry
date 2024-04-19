@@ -13,7 +13,7 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /
+        value: /original/
     backendRefs:
     - name: react-app
       port: 80
