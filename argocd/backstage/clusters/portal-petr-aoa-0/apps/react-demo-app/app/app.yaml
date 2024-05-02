@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: react-demo-ns
+  labels:
+    backstage.io/kubernetes-id: react-demo-app
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: react-demo-app
+  namespace: react-demo-ns
+  labels:
+    backstage.io/kubernetes-id: react-demo-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-demo-app
+  namespace: react-demo-ns
+  labels:
+    app: react-demo-app
+    backstage.io/kubernetes-id: react-demo-app
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80
+  selector:
+    app: react-demo-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-demo-app
+  namespace: react-demo-ns
+  labels:
+    backstage.io/kubernetes-id: react-demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-demo-app
+  template:
+    metadata:
+      labels:
+        app: react-demo-app
+        backstage.io/kubernetes-id: react-demo-app
+    spec:
+      serviceAccountName: react-demo-app
+      containers:
+      - image: mcallisterpetr/my-react-app:latest
+        imagePullPolicy: Always
+        name: react-demo-app
+        ports:
+        - containerPort: 80
