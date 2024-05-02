@@ -11,5 +11,5 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  # TODO: templatize owner
+  # TODO: templatize owner in future
   owner:  group:default/app-team
