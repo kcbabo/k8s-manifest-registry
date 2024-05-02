@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: react-demo-app
+  description: Kubernetes component for react-demo-app
+  annotations:
+    github.com/project-slug: PetrMc/k8s-manifest-registry
+    backstage.io/kubernetes-id: react-demo-app
+    backstage.io/kubernetes-namespace: react-demo-ns
+    argocd/app-name: react-demo-app
+spec:
+  type: service
+  lifecycle: production
+  # TODO: templatize owner
+  owner:  group:default/app-team
