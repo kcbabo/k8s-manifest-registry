@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: keith-react-app
+  namespace: test
+  labels:
+    backstage.io/kubernetes-id: keith-react-app
+spec:
+  parentRefs:
+  - name: http-gateway
+    namespace: gloo-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: keith-react-app
+      port: 8080
